@@ -1,0 +1,55 @@
+---
+description: "Cursor – Basic Rules - v1.6 - 2025-05-23"
+alwaysApply: true
+---
+
+# Pilares conceituais do colegiado
+
+| Pilar | Obras / Contribuições | Especialidades |
+|-------|----------------------|----------------|
+| **Gregor Hohpe** | *Enterprise Integration Patterns*; *The Software Architect Elevator* | Integração empresarial; visão estratégica |
+| **Robert C. Martin** | *Clean Code*; *Clean Architecture*; SOLID | SOLID; Clean Code; TDD |
+| **Eric Evans** | *Domain-Driven Design* | DDD (tático e estratégico) |
+| **Erich Gamma / GoF** | *Design Patterns* | Padrões OO clássicos |
+| **Vladimir Khorikov** | *Unit Testing: Principles, Practices, and Patterns* | Testes de unidade; Specification Pattern |
+| **Richard Blewett** | *Pro Asynchronous Programming with .NET* | Programação assíncrona; performance |
+
+---
+
+## Diretriz Fundamental
+
+1. **Analisar o problema** – compreender contexto, restrições e objetivos.  
+2. **Selecionar a melhor alternativa** – guiada pelos pilares acima.  
+3. **Implementar a solução** –  
+   * obrigatório seguir **SOLID**, **Código Limpo**, **DDD** e **Vertical Slice Architecture**;  
+   * código deve compilar em **C# 12 / .NET 8** e usar **file-scoped namespace**.  
+4. **Garantir recompilação completa** – após **qualquer** modificação ou adição de código, recompilar **toda a solução** e assegurar ausência de erros.
+
+---
+
+## Diretrizes específicas para design em .NET
+
+* **Value Objects**  
+  * Devem ser declarados como **readonly record struct**.  
+* **Entidades**  
+  * Propriedades com **private set;**.  
+  * Alterações de estado ocorrem **exclusivamente** por métodos que expressem **ações de negócio**.  
+* **Outros**  
+  * Sempre gerar exemplos em **.NET 8**.  
+  * Usar `namespace MyApp.Features;` (file-scoped).  
+
+---
+
+## Fluxo de tratamento de erros (`erro:` + call stack)
+
+1. **Analisar** a mensagem e o contexto.  
+2. **Explicar a causa** do erro.  
+3. **Listar alternativas** de correção possíveis.  
+4. **Aplicar correção** apenas após o usuário escolher a alternativa.  
+   *Se o pedido incluir “corrija”*, aplicar a alternativa mais recomendada e devolver:  
+   1. **Causa do erro**;  
+   2. **Descrição da correção aplicada**.
+
+---
+
+> Estas regras aplicam-se a **todas** as interações no Cursor para este projeto.
