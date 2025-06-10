@@ -1,5 +1,5 @@
 ---
-description: "Cursor – Basic Rules - v1.10 - 2025-06-10"
+description: "Cursor – Basic Rules - v1.11 - 2025-06-10"
 alwaysApply: true
 ---
 
@@ -19,7 +19,8 @@ alwaysApply: true
 ## Diretriz Fundamental
 
 1. **Analisar o problema** – compreender contexto, restrições e objetivos.  
-2. **Consultar a documentação** – **antes de qualquer implementação**, verificar as diretrizes na pasta `docs/` correspondente ao artefato afetado.  
+2. **Consultar a documentação** – **antes de qualquer implementação**, verificar as diretrizes na pasta  
+   `docs/guidelines/` correspondente ao artefato afetado (`.common` → tipo → artefato).  
 3. **Selecionar a melhor alternativa** – guiada pelos pilares acima **e** pelas guidelines vigentes.  
 4. **Implementar a solução** –  
    * obrigatório seguir **SOLID**, **Código Limpo**, **DDD** e **Vertical Slice Architecture**;  
@@ -29,79 +30,25 @@ alwaysApply: true
 
 ---
 
-## Estrutura de Documentação (`docs/`)
+## Estrutura de Documentação
 
-```text
+Os detalhes completos residem no `docs/README.md`. Resumidamente:
+
+```
 docs/
-├─ README.md
 ├─ adr/
-│  └─ 0001-first-decision.md
-├─ dotnet/
-│  ├─ .common/                # guidelines globais para todos os artefatos .NET
-│  │  ├─ coding-standards.md
-│  │  └─ dependencies.md
-│  ├─ api-billing/
-│  │  ├─ api-guidelines.md
-│  │  └─ testing-guidelines.md
-│  └─ windows-client/
-│     └─ winforms-guidelines.md
-├─ angular/
-│  ├─ .common/
-│  │  └─ spa-standards.md
-│  └─ my-spa/
-│     └─ spa-guidelines.md
-├─ infra/
-│  ├─ .common/
-│  │  └─ infra-standards.md
-│  ├─ docker/
-│  │  └─ docker-guidelines.md
-│  └─ cicd/
-│     └─ cicd-guidelines.md
-└─ domain/
-   ├─ .common/
-   │  └─ domain-principles.md
-   └─ requisitos-funcionais.md
+└─ guidelines/
+   ├─ <tipo>/.common/
+   └─ <tipo>/<artefato>/
 ```
 
-### Convenções e política de precedência
+### Política de precedência
 
-| Nível | Pasta | Precedência |
-|-------|-------|-------------|
-| **Local (mais forte)** | `docs/<tipo>/<artefato>/` | Regra específica para um artefato. |
-| **Comum por tipo** | `docs/<tipo>/.common/` | Aplica‑se a todos os artefatos daquele tipo, **exceto** onde um arquivo local declara override explícito. |
-| **Global** | `docs/adr/` e demais pastas fora de tipo | Contexto amplo; aplica onde não houver regulamento mais específico. |
+1. **Local** (`guidelines/<tipo>/<artefato>/`)  
+2. **Comum por tipo** (`guidelines/<tipo>/.common/`)  
+3. **Global** (`00-basic.mdc`, ADRs)
 
-*Se um guideline local divergir de `.common`, ele deve*:
-
-```markdown
-> **Override**: substitui a regra _X_ definida em `../.common/coding-standards.md`
-```
-
-### Front‑matter padrão
-
-```yaml
----
-title: "API Guidelines – Billing"
-version: 1.5
-scope: local            # local | common | global
-order: 30               # navegação (opcional)
-owner: Billing Team
-lastReviewed: 2025-06-10
----
-```
-
-* `scope` indica a camada de precedência.  
-* Automação CI verifica que não existam dois arquivos `scope: local` e `scope: common` com o mesmo `slug` na mesma árvore sem declaração de *Override*.
-
----
-
-### Integração CI / Automação
-
-* **Validação de PR**
-  * Detecta alterações em `.common/` → requer aprovação dos owners de **todos** artefatos afetados.
-  * Detecta divergência não documentada (falta de bloco **Override**).
-* **Nightly job** alerta `owner` quando `lastReviewed` > 90 dias.
-* **Link linter** verifica links internos e âncoras.
+Em caso de sobreposição, regras locais prevalecem e devem conter bloco **Override** apontando a regra substituída.
 
 ---
 
