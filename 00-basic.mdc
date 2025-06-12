@@ -1,5 +1,6 @@
 ---
 description: "Cursor – Basic Rules - v1.11 - 2025-06-10"
+globs: 
 alwaysApply: true
 ---
 
@@ -28,6 +29,17 @@ alwaysApply: true
    * **Value Objects** como `readonly record struct`; **Entidades** com `private set;` e mutação via métodos de negócio.  
 5. **Garantir recompilação completa** – recompilar **toda a solução** após qualquer modificação de código.
 
+## Diretrizes de Desenvolvimento
+
+Todas as diretrizes de desenvolvimento estão organizadas na pasta `docs/guidelines/`. Esta estrutura garante que:
+
+1. **Diretrizes Específicas** - Cada tipo de artefato possui suas próprias diretrizes em `docs/guidelines/<tipo>/<artefato>/`
+2. **Diretrizes Comuns** - Regras compartilhadas por tipo de artefato em `docs/guidelines/<tipo>/.common/`
+3. **Hierarquia de Precedência** - Diretrizes específicas têm precedência sobre as comuns
+4. **Documentação Viva** - As diretrizes são mantidas atualizadas e refletem as melhores práticas do projeto
+
+**IMPORTANTE**: Antes de iniciar qualquer implementação, é **OBRIGATÓRIO** consultar e seguir todas as diretrizes aplicáveis na pasta `docs/guidelines/`.
+
 ---
 
 ## Estrutura de Documentação
@@ -36,11 +48,10 @@ Os detalhes completos residem no `docs/README.md`. Resumidamente:
 
 ```
 docs/
-├─ adr/
-└─ guidelines/
-   ├─ <tipo>/.common/
-   └─ <tipo>/<artefato>/
-```
+├─ adr/                    # Arquitetural Decision Records
+└─ guidelines/             # Diretrizes por tipo de artefato
+    ├─ <tipo>/.common/     # Regras comuns por tipo
+    └─ <tipo>/<artefato>/  # Regras específicas por artefato
 
 ### Política de precedência
 
